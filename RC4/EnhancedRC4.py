@@ -1,4 +1,5 @@
 from random import sample
+from time import time
 
 N = 256
 half_n = round(N / 2)
@@ -79,25 +80,34 @@ def RC4(key, k, pt):
 def showStatus(process, plain_text, key, key_stream, crypt):
     print(process)
     print("Text =", plain_text)
-    print("Key =", key)
-    print("Key Stream =", key_stream)
+    # print("Key =", key)
+    # print("Key Stream =", key_stream)
     print("Resultado ==", crypt)
 
 
 def main():
-    text = "texto plano"
+    text = "meet me at the toga party"
     K = "Llave"
     k = 4
+
     secret_key = list(map(lambda x: ord(x), sample(K, k)))
     # Sample obtiene k numeros al azar de la N = 256
     initial_vector = sample(range(N), k)
     key = secret_key + initial_vector    # Definicion de las llaves
 
+    start_time = time()
     encrypt, key_stream = RC4(key, k, text)  # Encriptado
     showStatus("Encryption", text, key, key_stream, encrypt)  # Proceso encripcion
+    elapsed_time = time() - start_time
+    print(encrypt)
+    print("--->Tiempo en encriptar: [%0.10f] seconds.\n" % elapsed_time)
 
+    start_time = time()
     decrypt, key_stream = RC4(key, k, encrypt)  # Desencriptado
     showStatus("Decryption", encrypt, key, key_stream, decrypt)  # Proceso desencriptado
+    elapsed_time = time() - start_time
+    print(decrypt)
+    print("--->Tiempo en desencriptar: [%0.10f] seconds.\n" % elapsed_time)
 
 
 main()
