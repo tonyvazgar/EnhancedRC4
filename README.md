@@ -2,8 +2,8 @@
 
 Para correr se hace cualquiera de los siguientes comandos:
 
-	python3 NormalRC4.py
-	python3 EnhancedRC4.py
+	$ python3 NormalRC4.py
+	$ python3 EnhancedRC4.py
 
 
 
