@@ -7,12 +7,13 @@ class RC4(object):
         for i in range(0, 256):
             S.append(i)
             T.append(ord(key[i % len(key)]))
-
+        
         j = 0
         for i in range(0, 256):
             j = (j + S[i] + T[i]) % 256
             S[i], S[j] = S[j], S[i]
 
+        # print("S-BOX: ", S)
         return S
 
     def prga(self, S, length):
@@ -35,9 +36,7 @@ class RC4(object):
 
         # Get keystream
         p = self.ksa(key)
-        keystream = self.prga(p, len(secret))
-
-        # print(keystream)
+        keystream = self.prga(p, len(secret))       
 
         # Secret to hex
         for s in list(secret):
@@ -47,7 +46,9 @@ class RC4(object):
         for i in range(len(cipher)):
             cipher[i] = xor(cipher[i], keystream[i])
 
-        return list_to_string(cipher)
+        ciphert = list_to_string(cipher)
+        # print(p)
+        return ciphert
 
     def decrypt(self, cipher, key):
         message = []
@@ -66,7 +67,6 @@ class RC4(object):
         return list_to_string(message)
 
 
-
 def xor(m, n):
     return hex(int(m, 16) ^ int(n, 16))[2:].zfill(2)
 
@@ -79,7 +79,9 @@ def decode_from_hex(h):
 
 
 def main():
-    plaintext, key = 'meet me at the toga party', 'Llave'
+    print("Normal RC4")
+    plaintext, key = 'meet me at the toga party meet me at the toga party', 'Llave'
+    print(len(plaintext))
     print("Text =", plaintext)
     print("Key  = ", key, "\n")
 
@@ -89,13 +91,16 @@ def main():
     cipher = rc4.encrypt(plaintext, key)
     elapsed_time = time() - start_time
     print("Resultado = " , cipher)
-    print("--->Tiempo en encriptar: [%0.10f] seconds.\n" % elapsed_time)
+    print("---> Tiempo en encriptar: [%0.5f] seconds.\n" % elapsed_time)
+
+    print("Text =", cipher)
+    print("Key  = ", key)
 
     start_time = time()
     message = decode_from_hex(rc4.decrypt(cipher, key))
     elapsed_time = time() - start_time
     print("Resultado = " , message)
-    print("--->Tiempo en desencriptar: [%0.10f] seconds.\n" % elapsed_time)
+    print("---> Tiempo en desencriptar: [%0.5f] seconds.\n" % elapsed_time)
 
     
 main()

@@ -82,10 +82,11 @@ def showStatus(process, plain_text, key, key_stream, crypt):
     print("Text =", plain_text)
     # print("Key =", key)
     # print("Key Stream =", key_stream)
-    print("Resultado ==", crypt)
+    # print("Resultado ==", crypt)
 
 
 def main():
+    print("Enchanced RC4")
     text = "meet me at the toga party"
     K = "Llave"
     k = 4
@@ -99,15 +100,13 @@ def main():
     encrypt, key_stream = RC4(key, k, text)  # Encriptado
     showStatus("Encryption", text, key, key_stream, encrypt)  # Proceso encripcion
     elapsed_time = time() - start_time
-    print(encrypt)
-    print("--->Tiempo en encriptar: [%0.10f] seconds.\n" % elapsed_time)
+    print("--->Tiempo en encriptar: [%0.5f] seconds.\n" % elapsed_time)
 
     start_time = time()
     decrypt, key_stream = RC4(key, k, encrypt)  # Desencriptado
     showStatus("Decryption", encrypt, key, key_stream, decrypt)  # Proceso desencriptado
     elapsed_time = time() - start_time
-    print(decrypt)
-    print("--->Tiempo en desencriptar: [%0.10f] seconds.\n" % elapsed_time)
+    print("--->Tiempo en desencriptar: [%0.5f] seconds.\n" % elapsed_time)
 
 
 main()
