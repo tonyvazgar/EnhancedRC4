@@ -9,7 +9,7 @@ Para correr se hace cualquiera de los siguientes comandos:
 
 Y los tiempos se miden en cada uno tanto para encriptar como en desencriptar
 
-# Tiempo de encriptación:
+<h2> Tiempo de encriptación: </h2>
 
 ![alt text](https://github.com/tonyvazgar/EnhancedRC4/blob/master/Encryption%20time%201.png)
 ![alt text](https://github.com/tonyvazgar/EnhancedRC4/blob/master/Encryption%20time%202.png)
